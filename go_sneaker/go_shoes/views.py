@@ -46,7 +46,6 @@ def index(request):
         'shoes_price', 
         'shoes_color'
     )
-
     cart_items = request.session.get('cart_items', [])
 
     context = {
