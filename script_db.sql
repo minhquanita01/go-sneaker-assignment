@@ -9,7 +9,7 @@ create table GO_Shoes
   shoes_image_path text,
   shoes_name text,
   shoes_description text,
-  shoes_price decimal(16,2) check (shoes_price >= 0),
+  shoes_price double check (shoes_price >= 0),
   shoes_color varchar(10),
   shoes_quantity integer check (shoes_quantity >= 0)
 );

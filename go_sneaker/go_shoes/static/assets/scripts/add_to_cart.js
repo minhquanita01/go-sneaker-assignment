@@ -32,3 +32,15 @@ function updateCartDisplay(data)
 
     document.querySelector(".cart .total-cost").textContent = `$${data.total_cost}`;
 }
+
+document.addEventListener('DOMContentLoaded', function() 
+{
+    var incQuantityButtons = document.querySelectorAll('.item-inc-quantity');
+    incQuantityButtons.forEach(function(button) 
+    {
+        button.addEventListener('click', function() 
+        {
+            var itemQuantity;
+        });
+    });
+});
