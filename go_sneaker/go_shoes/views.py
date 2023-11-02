@@ -18,6 +18,14 @@ def add_to_cart(request):
     
     cart_items = request.session.get('cart_items', [])
     request.session['cart_items'] = cart_items
+    request.session['cart_items'].append(
+        {
+            "shoes_image_path": shoe.shoes_image_path,
+            "shoes_name": shoe.shoes_name,
+            "shoes_price": shoe.shoes_price,
+            "buy_quantity": 1,
+        }
+    )
     
     shoe_price = shoe.shoes_price
     total_cost = request.session.get('total_cost', 0)
@@ -39,7 +47,7 @@ def index(request):
         'shoes_color'
     )
 
-    cart_items = request.session.get('cart', [])
+    cart_items = request.session.get('cart_items', [])
 
     context = {
         'available_shoes': available_shoes,
