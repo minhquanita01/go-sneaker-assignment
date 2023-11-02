@@ -1,1 +1,1 @@
-# go-sneaker-assignment
+# GO-Sneaker-Assignment
