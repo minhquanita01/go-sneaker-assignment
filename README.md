@@ -13,4 +13,4 @@ Here's how to set up this project on your local machine:
 - Run the command `pip install -r requirements.txt` for Python to install the necessary libraries onto the virtual environment.
 - Navigate to the [`/go_sneaker`](./go_sneaker) directory and migrate table in database by using command `python manage.py makemigrations go_shoes` then `python manage.py migrate`
 - Then execute the command `python manage.py collectstatic` to create a container for asset files.
-- Launch the server using the command `python manage.py runserver`.
+- Launch the server using the command `python manage.py runserver`, then you can access the webpage via `localhost:8000`
