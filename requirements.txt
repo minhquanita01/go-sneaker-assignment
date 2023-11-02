@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 asgiref==3.7.2
 Django==4.2.7
 mysqlclient==2.2.0
 sqlparse==0.4.4
 tzdata==2023.3
-=======
-asgiref==3.7.2
-Django==4.2.7
-mysqlclient==2.2.0
-sqlparse==0.4.4
-tzdata==2023.3
->>>>>>> 0d41086a3a90370f94e40901e573e9ddf10d20c3
