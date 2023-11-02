@@ -98,4 +98,4 @@ __pycache__/
 staticfiles/
 
 # Libary folder
-site-packages/
+site-packages/**
