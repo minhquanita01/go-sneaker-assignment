@@ -6,7 +6,7 @@
     <div class="cart-item-info-zone">
         <div class="cart-item-name">{{ shoe.shoes_name }}</div>
         <div class="cart-item-price">${{ shoe.shoes_price|floatformat:2 }}</div>
-        <div class="cart-item-quantity-control-zone">
+        <div data-shoe-id="{{ shoe.shoesID }}" class="cart-item-quantity-control-zone">
             <div class="cart-item-quantity-adjust">
                 <span class="item-dec-quantity">-</span>
                 <span class="item-quantity">1</span>

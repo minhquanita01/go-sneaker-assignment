@@ -235,6 +235,7 @@ body
 
 .cart .cart-item-info-zone
 {
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -292,6 +293,13 @@ body
 .product .add-to-cart-btn:hover , .cart .cart-item-remove:hover
 {
     background-color: #f8d43f;
+}
+
+.cart .no-item
+{
+    margin: 14px 0;
+    font-size: 14px;
+    color: var(--black-main-color);
 }
 
 .cart .item-quantity

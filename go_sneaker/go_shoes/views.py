@@ -14,13 +14,14 @@ def add_to_cart(request):
     try:
         shoe = GO_Shoes.objects.get(shoesID = shoe_id)
     except GO_Shoes.DoesNotExist:
-        return JsonResponse({'error': 'Shoe not found'}, status=404)
+        return JsonResponse({'error': 'Shoe not found'}, status = 404)
     
-    # del request.session['total_cost']
+    del request.session['total_cost']
 
     cart_items = request.session.get('cart_items', [])
     cart_items.append(
         {
+            "shoes_ID": shoe.shoesID,
             "shoes_image_path": shoe.shoes_image_path,
             "shoes_name": shoe.shoes_name,
             "shoes_price": shoe.shoes_price,
@@ -49,6 +50,7 @@ def index(request):
         'shoes_color'
     )
     cart_items = request.session.get('cart_items', [])
+    #del request.session['cart_items']
 
     context = {
         'available_shoes': available_shoes,
