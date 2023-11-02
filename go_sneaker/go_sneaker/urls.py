@@ -21,5 +21,7 @@ from go_shoes import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('go_shoes/add-to-cart/', views.add_to_cart, name='add-to-cart'),
+    path('go_shoes/add_to_cart/', views.add_to_cart, name='add_to_cart'),
+    path('go_shoes/inc_quantity/', views.inc_quantity_cart, name='inc_quantity'),
+    path('go_shoes/remove_cart_item/', views.remove_cart_item, name='remove_cart_item'),
 ]

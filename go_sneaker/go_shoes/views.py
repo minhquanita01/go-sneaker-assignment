@@ -16,8 +16,6 @@ def add_to_cart(request):
     except GO_Shoes.DoesNotExist:
         return JsonResponse({'error': 'Shoe not found'}, status = 404)
     
-    del request.session['total_cost']
-
     cart_items = request.session.get('cart_items', [])
     cart_items.append(
         {
@@ -28,21 +26,80 @@ def add_to_cart(request):
             "buy_quantity": 1,
         }
     )
-    request.session['cart_items'] = cart_items
-    
     shoe_price = shoe.shoes_price
     total_cost = request.session.get('total_cost', 0)
     total_cost += shoe_price
+    request.session['cart_items'] = cart_items
     request.session['total_cost'] = total_cost
     
     cart_item_html = render_to_string('cart_item.html', {'shoe': shoe})
     
     return JsonResponse({'html': cart_item_html, 'total_cost': total_cost})
 
+@require_POST
+@csrf_exempt
+def inc_quantity_cart(request):
+    data = json.loads(request.body)
+    shoe_id = data.get('shoe_id')
+    
+    cart_items = request.session.get('cart_items', [])
+    total_cost = request.session.get('total_cost', 0)
+    item_quantity = 0
+    for item in cart_items:
+        if item["shoes_ID"] == int(shoe_id):
+            item_quantity = item["buy_quantity"] = item["buy_quantity"] + 1
+            total_cost += item["shoes_price"]
+            break
+    
+    request.session['cart_items'] = cart_items
+    request.session['total_cost'] = total_cost
+    
+    return JsonResponse({'total_cost': total_cost, 'item_quantity': item_quantity})
+
+@require_POST
+@csrf_exempt
+def desc_quantity_cart(request):
+    data = json.loads(request.body)
+    shoe_id = data.get('shoe_id')
+    
+    cart_items = request.session.get('cart_items', [])
+    total_cost = request.session.get('total_cost', 0)
+    item_quantity = 0
+    for item in cart_items:
+        if item["shoes_ID"] == int(shoe_id):
+            item_quantity = item["buy_quantity"] = item["buy_quantity"] + 1
+            total_cost += item["shoes_price"]
+            break
+    
+    request.session['cart_items'] = cart_items
+    request.session['total_cost'] = total_cost
+    
+    return JsonResponse({'total_cost': total_cost, 'item_quantity': item_quantity})
+
+@require_POST
+@csrf_exempt
+def remove_cart_item(request):
+    data = json.loads(request.body)
+    shoe_id = data.get('shoe_id')
+    
+    cart_items = request.session.get('cart_items', [])
+    total_cost = request.session.get('total_cost', 0)
+    for item in cart_items:
+        if item["shoes_ID"] == int(shoe_id):
+            total_cost -= (item["buy_quantity"] * item["shoes_price"])
+            cart_items.remove(item)
+            break
+    
+    request.session['cart_items'] = cart_items
+    request.session['total_cost'] = total_cost
+    
+    return JsonResponse({'total_cost': total_cost})
+
 def index(request):
     #Fetch only products which has quantity greater than 0 (it means that these products still available in the store)
     available_shoes = GO_Shoes.objects.exclude(shoes_quantity = 0).values
     (
+        'shoesID',
         'shoes_image_path', 
         'shoes_name', 
         'shoes_description', 
@@ -50,10 +107,11 @@ def index(request):
         'shoes_color'
     )
     cart_items = request.session.get('cart_items', [])
-    #del request.session['cart_items']
+    total_cost = request.session.get('total_cost', 0)
 
     context = {
         'available_shoes': available_shoes,
         'cart_items': cart_items,
+        'total_cost': total_cost,
         }
     return render(request, 'index.html', context)
