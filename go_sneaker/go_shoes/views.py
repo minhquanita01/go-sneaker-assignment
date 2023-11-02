@@ -12,17 +12,18 @@ def add_to_cart(request):
     data = json.loads(request.body)
     shoe_id = data.get('shoe_id')
     try:
-        shoe = GO_Shoes.objects.get(shoesID = shoe_id)
+        shoe = GO_Shoes.objects.get(shoes_ID = shoe_id)
     except GO_Shoes.DoesNotExist:
         return JsonResponse({'error': 'Shoe not found'}, status = 404)
     
     cart_items = request.session.get('cart_items', [])
     cart_items.append(
         {
-            "shoes_ID": shoe.shoesID,
+            "shoes_ID": shoe.shoes_ID,
             "shoes_image_path": shoe.shoes_image_path,
             "shoes_name": shoe.shoes_name,
             "shoes_price": shoe.shoes_price,
+            "shoes_color": shoe.shoes_color,
             "buy_quantity": 1,
         }
     )
@@ -101,13 +102,14 @@ def index(request):
     #Fetch only products which has quantity greater than 0 (it means that these products still available in the store)
     available_shoes = GO_Shoes.objects.exclude(shoes_quantity = 0).values
     (
-        'shoesID',
+        'shoes_ID',
         'shoes_image_path', 
         'shoes_name', 
         'shoes_description', 
         'shoes_price', 
         'shoes_color'
     )
+    #print(available_shoes[0])
     cart_items = request.session.get('cart_items', [])
     total_cost = request.session.get('total_cost', 0)
 

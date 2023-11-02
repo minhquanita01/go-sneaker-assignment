@@ -5,7 +5,7 @@ drop table if exists GO_Shoes;
 
 create table GO_Shoes
 (
-  shoesID integer primary key auto_increment,
+  shoes_ID integer primary key auto_increment,
   shoes_image_path text,
   shoes_name text,
   shoes_description text,

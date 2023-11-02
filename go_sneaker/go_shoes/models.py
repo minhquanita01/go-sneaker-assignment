@@ -4,7 +4,7 @@ from decimal import Decimal
 
 # Create your models here.
 class GO_Shoes(models.Model):
-    shoesID = models.AutoField(primary_key=True)
+    shoes_ID = models.AutoField(primary_key=True)
     shoes_image_path = models.TextField()
     shoes_name = models.TextField()
     shoes_description = models.TextField()

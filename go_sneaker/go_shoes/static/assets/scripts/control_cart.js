@@ -1,14 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () 
 {
-    document.querySelectorAll('.add-to-cart-btn').forEach((button) =>
-    {
-        button.addEventListener('click', function() 
-        {
-            var shoeId = this.getAttribute('data-shoe-id');
+    document.querySelectorAll('.add-to-cart-btn').forEach((button) => {
+        var shoeId = button.getAttribute('data-shoe-id');
+        if (localStorage.getItem('added-' + shoeId) === 'true') {
+            button.style.display = 'none';
+            button.nextElementSibling.style.display = 'flex';
+        }
+    });
 
-            this.style.display = 'none';
-            this.nextElementSibling.style.display = 'flex';
-            
+    document.body.addEventListener("click", (event) =>
+    {
+        var button = event.target.closest(".add-to-cart-btn");
+        
+        if (button)
+        {
+            var shoeId = button.getAttribute('data-shoe-id');
+            button.style.display = 'none';
+            button.nextElementSibling.style.display = 'flex';
+            localStorage.setItem('added-' + shoeId, 'true');            
             fetch('/go_shoes/add_to_cart/', 
             {
                 method: 'POST',
@@ -25,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function ()
                     updateToTalCostDisplay(data.total_cost);
                 }
             );
-        });
+        }
     });
 });
 
@@ -103,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function ()
                         var addedCheckIcon = document.querySelector(`.added-to-cart-container[data-shoe-id="${shoeId}"]`);
                         addedCheckIcon.style.display = "none";
                         addedCheckIcon.previousElementSibling.style.display = "block";
+                        localStorage.removeItem('added-' + shoeId);
                     }
                 }
             );
@@ -141,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function ()
             var addedCheckIcon = document.querySelector(`.added-to-cart-container[data-shoe-id="${shoeId}"]`);
             addedCheckIcon.style.display = "none";
             addedCheckIcon.previousElementSibling.style.display = "block";
+            localStorage.removeItem('added-' + shoeId);
         }
     });
 });
