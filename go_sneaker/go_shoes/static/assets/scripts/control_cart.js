@@ -41,14 +41,16 @@ function updateToTalCostDisplay(total_cost)
     document.querySelector(".cart .total-cost").textContent = `$${total_cost.toFixed(2)}`;
 }
 
+//Increase item quantity
 document.addEventListener('DOMContentLoaded', function () 
 {
-    var incQuantityButtons = document.querySelectorAll('.item-inc-quantity');
-    incQuantityButtons.forEach((button) =>
+    document.body.addEventListener("click", (event) =>
     {
-        button.addEventListener('click', function() 
+        var button = event.target.closest(".item-inc-quantity")
+        if (button)
         {
-            var shoeId = this.parentElement.parentElement.getAttribute("data-shoe-id");
+            var shoeId = button.parentElement.parentElement.getAttribute("data-shoe-id");
+
             fetch('/go_shoes/inc_quantity/', 
             {
                 method: 'POST',
@@ -62,19 +64,21 @@ document.addEventListener('DOMContentLoaded', function ()
             .then((data) => 
                 {
                     updateToTalCostDisplay(data.total_cost);
-                    this.previousElementSibling.textContent = data.item_quantity;
+                    button.previousElementSibling.textContent = data.item_quantity;
                 }
             );
-        });
+        }
     });
 });
 
 // Remove from cart
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.cart-item-remove').forEach((button) => 
+document.addEventListener('DOMContentLoaded', function () 
+{
+    document.body.addEventListener('click', (event) =>
     {
-        button.addEventListener('click', function () {
-            var shoeId = this.parentElement.getAttribute("data-shoe-id");
+        var button = event.target.closest('.cart-item-remove');
+        if (button) {
+            var shoeId = button.parentElement.getAttribute("data-shoe-id");
 
             fetch('/go_shoes/remove_cart_item/', 
             {
@@ -91,11 +95,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     updateToTalCostDisplay(data.total_cost);
                 }
             );
-            var cartItemContainer = this.closest('.cart-item-container');
+            var cartItemContainer = button.closest('.cart-item-container');
             if (cartItemContainer) 
             {
                 cartItemContainer.remove();
             }
-        });
+
+            var addedCheckIcon = document.querySelector(`.added-to-cart-container[data-shoe-id="${shoeId}"]`);
+            addedCheckIcon.style.display = "none";
+            addedCheckIcon.previousElementSibling.style.display = "block";
+        }
     });
 });
