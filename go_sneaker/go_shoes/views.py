@@ -67,8 +67,10 @@ def desc_quantity_cart(request):
     item_quantity = 0
     for item in cart_items:
         if item["shoes_ID"] == int(shoe_id):
-            item_quantity = item["buy_quantity"] = item["buy_quantity"] + 1
-            total_cost += item["shoes_price"]
+            item_quantity = item["buy_quantity"] = item["buy_quantity"] - 1
+            total_cost -= item["shoes_price"]
+            if item_quantity == 0:
+                cart_items.remove(item)
             break
     
     request.session['cart_items'] = cart_items

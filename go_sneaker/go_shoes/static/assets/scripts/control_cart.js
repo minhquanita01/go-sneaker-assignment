@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () 
 {
-    var addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    
-    addToCartButtons.forEach((button) =>
+    document.querySelectorAll('.add-to-cart-btn').forEach((button) =>
     {
         button.addEventListener('click', function() 
         {
@@ -71,6 +69,47 @@ document.addEventListener('DOMContentLoaded', function ()
     });
 });
 
+//Decrease item quantity 
+document.addEventListener('DOMContentLoaded', function () 
+{
+    document.body.addEventListener("click", (event) =>
+    {
+        var button = event.target.closest(".item-dec-quantity")
+        if (button)
+        {
+            var shoeId = button.parentElement.parentElement.getAttribute("data-shoe-id");
+
+            fetch('/go_shoes/dec_quantity/', 
+            {
+                method: 'POST',
+                body: JSON.stringify({ 'shoe_id': shoeId }),
+                headers: 
+                {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then((response) => response.json())
+            .then((data) => 
+                {
+                    updateToTalCostDisplay(data.total_cost);
+                    if (data.item_quantity > 0)
+                        button.nextElementSibling.textContent = data.item_quantity;
+                    else
+                    {
+                        var cartItemContainer = button.closest('.cart-item-container');
+                        if (cartItemContainer) 
+                            cartItemContainer.remove();
+
+                        var addedCheckIcon = document.querySelector(`.added-to-cart-container[data-shoe-id="${shoeId}"]`);
+                        addedCheckIcon.style.display = "none";
+                        addedCheckIcon.previousElementSibling.style.display = "block";
+                    }
+                }
+            );
+        }
+    });
+});
+
 // Remove from cart
 document.addEventListener('DOMContentLoaded', function () 
 {
@@ -96,10 +135,8 @@ document.addEventListener('DOMContentLoaded', function ()
                 }
             );
             var cartItemContainer = button.closest('.cart-item-container');
-            if (cartItemContainer) 
-            {
+            if (cartItemContainer)
                 cartItemContainer.remove();
-            }
 
             var addedCheckIcon = document.querySelector(`.added-to-cart-container[data-shoe-id="${shoeId}"]`);
             addedCheckIcon.style.display = "none";
