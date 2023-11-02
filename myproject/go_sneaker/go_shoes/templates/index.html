@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Sneaker</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,700&display=swap">
+    <link rel="shortcut icon" href="{% static 'assets/favicon/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="main-container">
+        <div class="product column-container">
+            <div class="logo-at-top">
+                <img src="{% static 'assets/img/nike.png' %}" alt="G-Sneaker">
+            </div>
+            <div class="column-title">
+                <h2>Our Products</h2>
+            </div>
+            <div class="product column-body">
+                <!-- Product Items -->
+
+                {% for shoe in available_shoes %}
+                    <div class="product-item-container">
+                        <div style="background-color: {{ shoe.shoes_color }}" class="product-item-image-container">
+                            <img src="{{ shoe.shoes_image_path }}" alt="">
+                        </div>
+                        <h3 class="product-item-name">{{ shoe.shoes_name }}</h3>
+                        <p class="product-item-description">{{ shoe.shoes_description }}</p>
+                        <div class="product-item-sell-area">
+                            <span class="product-item-price">${{ shoe.shoes_price|floatformat:2 }}</span>
+                            <span class="add-to-cart-btn" data-shoe-id="{{ shoe.shoesID }}">ADD TO CART</span>
+                            <div class="added-to-cart-container">
+                                <img src="{% static 'assets/img/check.png' %}" alt="">
+                            </div>
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+                
+            </div>
+            
+        </div>
+
+        <div class="cart column-container">
+            <div class="logo-at-top">
+                <img src="{% static 'assets/img/nike.png' %}" alt="G-Sneaker">
+            </div>
+            <div class="column-title">
+                <h2>Your cart</h2>
+                {% with total_cost=0 %}
+                <h2 class="total-cost">${{ total_cost|floatformat:2 }}</h2>
+                {% endwith %}
+            </div>
+            <div class="cart column-body">
+                <!-- Cart Item -->
+            </div>
+                            
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'assets/scripts/add_to_cart.js' %}"></script>
+</body>
+</html>
