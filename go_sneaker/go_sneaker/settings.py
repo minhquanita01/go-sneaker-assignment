@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Django settings for go_sneaker project.
 
@@ -132,7 +131,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-=======
 """
 Django settings for go_sneaker project.
 
@@ -266,4 +264,3 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
->>>>>>> 0d41086a3a90370f94e40901e573e9ddf10d20c3
