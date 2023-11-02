@@ -55,6 +55,27 @@
             </div>
             <div class="cart column-body">
                 <!-- Cart Item -->
+                {% for item in cart_items %}
+                    <div class="cart-item-container">
+                        <div style="background-color: {{ item.shoes_color }}" class="cart-item-image">
+                            <img src="{{ item.shoes_image_path }}" alt="">
+                        </div>
+                        <div class="cart-item-info-zone">
+                            <div class="cart-item-name">{{ item.shoes_name }}</div>
+                            <div class="cart-item-price">${{ item.shoes_price|floatformat:2 }}</div>
+                            <div class="cart-item-quantity-control-zone">
+                                <div class="cart-item-quantity-adjust">
+                                    <span class="item-dec-quantity">-</span>
+                                    <span class="item-quantity">1</span>
+                                    <span class="item-inc-quantity">+</span>
+                                </div>
+                                <div class="cart-item-remove">
+                                    <img src="{% static 'assets/img/trash.png' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
                             
         </div>

@@ -21,10 +21,7 @@ document.addEventListener('DOMContentLoaded', function()
                 }
             })
             .then((response) => response.json())
-            .then(function(data) 
-            {
-                updateCartDisplay(data);
-            });
+            .then((data) => updateCartDisplay(data));
         });
     });
 });
