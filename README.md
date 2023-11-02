@@ -6,9 +6,9 @@ Firstly, I would like to express my sincere gratitude to Golden Owl Consulting C
 ## Usage
 Here's how to set up this project on your local machine:
 
-- Install MySQL Server and MySQL Workbench, then execute the script at [`./my_project/script_db.sql`](script_db.sql).
-- Go to `setting.py` to update the username and password.
-- Activate the virtual environment (already present in the 'my_project' folder) using the file my_project/Scripts/activate.
+- Install MySQL Server and MySQL Workbench, then execute the script at [`script_db.sql`](./my_project/script_db.sql).
+- Go to [`setting.py`](./myproject/go_sneaker/go_sneaker/settings.py) to update the username and password.
+- Activate the virtual environment (already present in the 'my_project' folder) using the file [`my_project/Scripts/activate`](./my_project/Scripts/activate).
 - In the 'my_project' directory, run the command `pip install -r requirements.txt` for Python to install the necessary libraries onto the virtual environment.
-- Then, navigate to the /my_project/go_sneaker directory and execute the command `python manage.py collectstatic` to create a container for asset files.
+- Then, navigate to the [`/my_project/go_sneaker`](./my_project/go_sneaker) directory and execute the command `python manage.py collectstatic` to create a container for asset files.
 - Launch the server using the command `python manage.py runserver`.
