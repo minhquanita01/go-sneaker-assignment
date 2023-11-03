@@ -50,10 +50,10 @@
                 <h2>Your cart</h2>
                 <h2 class="total-cost">${{ total_cost|floatformat:2 }}</h2>
             </div>
+            <p class="no-item">Your cart is empty.</p>
             <div class="cart column-body">
                 <!-- Cart Item -->
                 {% for item in cart_items %}
-                    <p style="display: none;" class="no-item">Your cart is empty.</p>
                     <div class="cart-item-container">
                         <div style="background-color: {{ item.shoes_color }}" class="cart-item-image">
                             <img src="{{ item.shoes_image_path }}" alt="">
@@ -73,8 +73,6 @@
                             </div>
                         </div>
                     </div>
-                {% empty %}
-                    <p display="block" class="no-item">Your cart is empty.</p>
                 {% endfor %}
             </div>
                             

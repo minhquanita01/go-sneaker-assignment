@@ -297,6 +297,7 @@ body
 
 .cart .no-item
 {
+    position: relative;
     margin: 14px 0;
     font-size: 14px;
     color: var(--black-main-color);
