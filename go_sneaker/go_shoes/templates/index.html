@@ -50,9 +50,7 @@
                 <h2>Your cart</h2>
                 <h2 class="total-cost">${{ total_cost|floatformat:2 }}</h2>
             </div>
-            {% if not cart_items %}
-            <p class="no-item">Your cart is empty.</p>
-            {% endif %}
+            <p style="display: {{ show_empty }};" class="no-item">Your cart is empty.</p>
             <div class="cart column-body">
             
                 <!-- Cart Item -->

@@ -117,5 +117,6 @@ def index(request):
         'available_shoes': available_shoes,
         'cart_items': cart_items,
         'total_cost': total_cost,
+        'show_empty': "none" if len(cart_items) else "block",
         }
     return render(request, 'index.html', context)
