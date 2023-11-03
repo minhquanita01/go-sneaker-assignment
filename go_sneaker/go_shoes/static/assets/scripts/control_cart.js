@@ -2,9 +2,11 @@ var noItemElement = document.querySelector(".cart .no-item");
 
 document.addEventListener('DOMContentLoaded', function () 
 {
-    document.querySelectorAll('.add-to-cart-btn').forEach((button) => {
+    document.querySelectorAll('.add-to-cart-btn').forEach((button) => 
+    {
         var shoeId = button.getAttribute('data-shoe-id');
-        if (localStorage.getItem('added-' + shoeId) === 'true') {
+        if (localStorage.getItem('added-' + shoeId) === 'true') 
+        {
             button.style.display = 'none';
             button.nextElementSibling.style.display = 'flex';
         }
@@ -123,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function ()
                         if (isCartEmpty())
                             noItemElement.style.display = "block";
                     }
-                    
                 }
             );
         }
