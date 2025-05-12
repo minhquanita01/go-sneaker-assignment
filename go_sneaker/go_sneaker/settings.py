@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'GO_Sneaker_Store',
         'USER': 'root',
-        'PASSWORD': '19120626',
+        'PASSWORD': 'UNKNOWN',
         'HOST': 'localhost',
         'PORT': '3306',
     }
